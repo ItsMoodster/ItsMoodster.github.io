@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sales Queue</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .container {
+            text-align: center;
+        }
+
+        .black-line {
+            border: 2px solid black;
+        }
+
+        #currentlyWith li {
+            color: red;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Sales Queue</h1>
+        <input type="text" id="nameInput" placeholder="Enter associate name">
+        <button id="addName">Add to Queue</button>
+        <h2>Waiting in Line</h2>
+        <ul id="waitingQueue"></ul>
+        <h2>Currently With</h2>
+        <hr class="black-line">
+        <ul id="currentlyWith"></ul>
+    </div>
+    <script>
+        document.getElementById("addName").addEventListener("click", function() {
+            const name = document.getElementById("nameInput").value;
+            if (name) {
+                addToList(name, "waitingQueue");
+            }
+            document.getElementById("nameInput").value = "";
+        });
+
+        function addToList(name, listId) {
+            const list = document.getElementById(listId);
+            const listItem = document.createElement("li");
+            listItem.innerText = name;
+            listItem.addEventListener("click", function() {
+                if (listId === "waitingQueue") {
+                    addToList(name, "currentlyWith");
+                } else {
+                    addToList(name, "waitingQueue");
+                }
+                list.removeChild(listItem);
+            });
+            list.appendChild(listItem);
+        }
+    </script>
+</body>
+</html>
