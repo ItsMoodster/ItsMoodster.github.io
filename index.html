@@ -56,11 +56,6 @@
             border-bottom: 2px solid black;
         }
 
-        h2.you-are-next {
-            border-bottom: 2px solid black;
-            margin-bottom: 5px;
-        }
-
         ul {
             list-style: none;
             padding: 0;
@@ -74,9 +69,13 @@
             background-color: white;
         }
 
-        #nextInLine {
+        #waitingQueue li:first-child {
             background-color: #d4edda;
             cursor: pointer;
+        }
+
+        #waitingQueue li:not(:first-child) {
+            cursor: not-allowed;
         }
 
         li:hover {
@@ -93,8 +92,6 @@
         <h1>Sales Queue</h1>
         <input type="text" id="nameInput" placeholder="Enter associate name">
         <button id="addName">Add to Queue</button>
-        <h2 class="you-are-next">YOU ARE NEXT</h2>
-        <div id="nextInLine" class="name"></div>
         <h2 class="waiting-in-line">Waiting in Line</h2>
         <ul id="waitingQueue"></ul>
         <h2>Currently With</h2>
@@ -110,44 +107,26 @@
             document.getElementById("nameInput").value = "";
         });
 
-        function addToList(name, listId)            const list = document.getElementById(listId);
+        function addToList(name, listId) {
+            const list = document.getElementById(listId);
             const listItem = document.createElement("li");
             listItem.innerText = name;
 
-            if (listId === "waitingQueue") {
-                if (list.children.length === 0) {
-                    const nextInLine = document.getElementById("nextInLine");
-                    nextInLine.innerText = name;
-                    nextInLine.addEventListener("click", function() {
+            if (            listId === "waitingQueue") {
+                listItem.addEventListener("click", function() {
+                    if (listItem === list.firstElementChild) {
                         addToList(name, "currentlyWith");
-                        list.removeChild(list.firstElementChild);
-                        updateNextInLine();
-                    });
-                } else {
-                    listItem.style.cursor = "not-allowed";
-                    list.appendChild(listItem);
-                }
+                        list.removeChild(listItem);
+                    }
+                });
             } else {
                 listItem.addEventListener("click", function() {
                     addToList(name, "waitingQueue");
                     list.removeChild(listItem);
                 });
-                list.appendChild(listItem);
             }
-        }
-
-        function updateNextInLine() {
-            const nextInLine = document.getElementById("nextInLine");
-            const waitingQueue = document.getElementById("waitingQueue");
-            if (waitingQueue.children.length > 0) {
-                const nextName = waitingQueue.firstElementChild.innerText;
-                nextInLine.innerText = nextName;
-                waitingQueue.removeChild(waitingQueue.firstElementChild);
-            } else {
-                nextInLine.innerText = "";
-                nextInLine.style.cursor = "not-allowed";
-                nextInLine.removeEventListener("click");
-            }
+            
+            list.appendChild(listItem);
         }
     </script>
 </body>
