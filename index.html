@@ -111,12 +111,7 @@
             if (name) {
                 addToList(name, "waitingQueue");
             }
-            document             .getElementById("nameInput").value = "";
-        });
-
-        function addToList(name, listId) {
-            const list = document.getElementById(listId);
-            const listItem = document.createElement("li");
+            document            = document.createElement("li");
             listItem.innerText = name;
 
             if (listId === "waitingQueue") {
