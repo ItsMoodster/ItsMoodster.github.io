@@ -79,10 +79,6 @@
             cursor: pointer;
         }
 
-        #waitingQueue li:not(:first-child) {
-            cursor: not-allowed;
-        }
-
         li:hover {
             background-color: #f5f5f5;
         }
@@ -111,7 +107,12 @@
             if (name) {
                 addToList(name, "waitingQueue");
             }
-            document            = document.createElement("li");
+            document.getElementById("nameInput").value = "";
+        });
+
+        function addToList(name, listId) {
+            const list = document.getElementById(listId);
+            const listItem            = document.createElement("li");
             listItem.innerText = name;
 
             if (listId === "waitingQueue") {
