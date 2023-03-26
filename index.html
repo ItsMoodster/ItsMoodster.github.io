@@ -66,12 +66,16 @@
             border: 1px solid #cccccc;
             border-radius: 3px;
             margin-bottom: 5px;
-            cursor: pointer;
             background-color: white;
         }
 
-        li:first-child {
+        #waitingQueue li:first-child {
             background-color: #d4edda;
+            cursor: pointer;
+        }
+
+        #waitingQueue li:not(:first-child) {
+            cursor: not-allowed;
         }
 
         li:hover {
@@ -107,16 +111,24 @@
             const list = document.getElementById(listId);
             const listItem = document.createElement("li");
             listItem.innerText = name;
-            listItem.addEventListener("click", function() {
-                if (listId === "waitingQueue") {
-                    addToList(name, "currentlyWith");
-                } else {
+
+            if (            listId === "waitingQueue") {
+                listItem.addEventListener("click", function() {
+                    if (listItem === list.firstElementChild) {
+                        addToList(name, "currentlyWith");
+                        list.removeChild(listItem);
+                    }
+                });
+            } else {
+                listItem.addEventListener("click", function() {
                     addToList(name, "waitingQueue");
-                }
-                list.removeChild(listItem);
-            });
+                    list.removeChild(listItem);
+                });
+            }
+            
             list.appendChild(listItem);
         }
     </script>
 </body>
 </html>
+
