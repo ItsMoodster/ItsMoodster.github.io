@@ -110,9 +110,8 @@
             document.getElementById("nameInput").value = "";
         });
 
-        function addToList(name, listId) {
-            const list = document.getElementById(listId);
-            const listItem            = document.createElement("li");
+        function addToList(name, listId)            const list = document.getElementById(listId);
+            const listItem = document.createElement("li");
             listItem.innerText = name;
 
             if (listId === "waitingQueue") {
@@ -142,7 +141,7 @@
             const waitingQueue = document.getElementById("waitingQueue");
             if (waitingQueue.children.length > 0) {
                 const nextName = waitingQueue.firstElementChild.innerText;
-                addToList(nextName, "waitingQueue");
+                nextInLine.innerText = nextName;
                 waitingQueue.removeChild(waitingQueue.firstElementChild);
             } else {
                 nextInLine.innerText = "";
