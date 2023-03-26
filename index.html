@@ -108,4 +108,15 @@
             const listItem = document.createElement("li");
             listItem.innerText = name;
             listItem.addEventListener("click", function() {
-                if (listId === "waitingQueue
+                if (listId === "waitingQueue") {
+                    addToList(name, "currentlyWith");
+                } else {
+                    addToList(name, "waitingQueue");
+                }
+                list.removeChild(listItem);
+            });
+            list.appendChild(listItem);
+        }
+    </script>
+</body>
+</html>
