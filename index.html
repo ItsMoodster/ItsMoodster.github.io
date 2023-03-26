@@ -98,7 +98,7 @@
         <input type="text" id="nameInput" placeholder="Enter associate name">
         <button id="addName">Add to Queue</button>
         <h2 class="you-are-next">YOU ARE NEXT</h2>
-        <div id="nextInLine"></div>
+        <div id="nextInLine" class="name"></div>
         <h2 class="waiting-in-line">Waiting in Line</h2>
         <ul id="waitingQueue"></ul>
         <h2>Currently With</h2>
@@ -109,9 +109,9 @@
         document.getElementById("addName").addEventListener("click", function() {
             const name = document.getElementById("nameInput").value;
             if (name) {
-                addToList(name, "waiting             Queue");
+                addToList(name, "waitingQueue");
             }
-            document.getElementById("nameInput").value = "";
+            document             .getElementById("nameInput").value = "";
         });
 
         function addToList(name, listId) {
