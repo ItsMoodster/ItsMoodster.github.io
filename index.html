@@ -1,134 +1,73 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sales Queue</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            max-width: 800px;
-            margin: 0 auto;
-            background-color: #f8f8f8;
-        }
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Fantasy Adventure</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #333;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      margin: 0;
+      padding: 0;
+    }
 
-        .container {
-            text-align: center;
-            background-color: #ffffff;
-            border: 1px solid #cccccc;
-            border-radius: 5px;
-            padding: 30px;
-            margin-top: 50px;
-            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
-        }
+    .container {
+      text-align: center;
+    }
 
-        h1 {
-            margin-bottom: 20px;
-        }
+    .title {
+      color: #fff;
+      font-size: 48px;
+      margin-bottom: 20px;
+    }
 
-        input[type="text"] {
-            padding: 5px;
-            border: 1px solid #cccccc;
-            border-radius: 3px;
-            width: 50%;
-        }
+    .menu-button {
+      background-color: #555;
+      color: #fff;
+      border: none;
+      padding: 10px 20px;
+      font-size: 18px;
+      cursor: pointer;
+      margin-bottom: 5px;
+      display: block;
+    }
 
-        button {
-            background-color: #0099ff;
-            color: white;
-            border: none;
-            padding: 10px 20px;
-            font-size: 16px;
-            border-radius: 3px;
-            margin-left: 10px;
-            cursor: pointer;
-        }
+    .menu-button:hover {
+      background-color: #777;
+    }
+  </style>
+  <script>
+    function startGame() {
+      alert('Starting the game...');
+    }
 
-        button:hover {
-            background-color: #007acc;
-        }
+    function loadGame() {
+      alert('Loading the game...');
+    }
 
-        h2 {
-            margin: 20px 0;
-        }
+    function openSettings() {
+      alert('Opening settings...');
+    }
 
-        h2.waiting-in-line {
-            border-bottom: 2px solid black;
-        }
-
-        ul {
-            list-style: none;
-            padding: 0;
-        }
-
-        li {
-            padding: 5px;
-            border: 1px solid #cccccc;
-            border-radius: 3px;
-            margin-bottom: 5px;
-            background-color: white;
-        }
-
-        #waitingQueue li:first-child {
-            background-color: #d4edda;
-            cursor: pointer;
-        }
-
-        #waitingQueue li:not(:first-child) {
-            cursor: not-allowed;
-        }
-
-        li:hover {
-            background-color: #f5f5f5;
-        }
-
-        #currentlyWith li {
-            color: red;
-        }
-    </style>
+    function showCredits() {
+      alert('Showing credits...');
+    }
+  </script>
 </head>
 <body>
-    <div class="container">
-        <h1>Sales Queue</h1>
-        <input type="text" id="nameInput" placeholder="Enter associate name">
-        <button id="addName">Add to Queue</button>
-        <h2 class="waiting-in-line">Waiting in Line</h2>
-        <ul id="waitingQueue"></ul>
-        <h2>Currently With</h2>
-        <hr class="black-line">
-        <ul id="currentlyWith"></ul>
+  <div class="container">
+    <h1 class="title">Fantasy Adventure</h1>
+    <div class="menu">
+      <button class="menu-button" id="startGame" onclick="startGame()">Start Game</button>
+      <button class="menu-button" id="loadGame" onclick="loadGame()">Load Game</button>
+      <button class="menu-button" id="settings" onclick="openSettings()">Settings</button>
+      <button class="menu-button" id="credits" onclick="showCredits()">Credits</button>
     </div>
-    <script>
-        document.getElementById("addName").addEventListener("click", function() {
-            const name = document.getElementById("nameInput").value;
-            if (name) {
-                addToList(name, "waitingQueue");
-            }
-            document.getElementById("nameInput").value = "";
-        });
-
-        function addToList(name, listId) {
-            const list = document.getElementById(listId);
-            const listItem = document.createElement("li");
-            listItem.innerText = name;
-
-            if (            listId === "waitingQueue") {
-                listItem.addEventListener("click", function() {
-                    if (listItem === list.firstElementChild) {
-                        addToList(name, "currentlyWith");
-                        list.removeChild(listItem);
-                    }
-                });
-            } else {
-                listItem.addEventListener("click", function() {
-                    addToList(name, "waitingQueue");
-                    list.removeChild(listItem);
-                });
-            }
-            
-            list.appendChild(listItem);
-        }
-    </script>
+  </div>
 </body>
 </html>
-
